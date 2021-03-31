@@ -1,18 +1,36 @@
 ---
 layout: page
-title: About
-permalink: /about/
+title: Git note
+permalink: /git/
 ---
+- Pull tất cả branch ở remote về local:
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+    ```bash
+    git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done
+    git fetch --all
+    git pull --all
+    ```
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+- Pull 1 branch cụ thể ở remote về local
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+    ```bash
+    git switch <branch_name>
+    ```
 
+- Nếu git bắt buộc retype password mỗi lần pull thì có 2 cách giải quyết:
+    1. Sử dụng SSH
+    2. Dùng lệnh:
 
-[jekyll-organization]: https://github.com/jekyll
+    ```bash
+    git config --global credential.helper 'cache --timeout 86400000'
+    ```
+
+- Xử lí khi muốn thay đổi code đã commit:
+
+    ```bash
+    1. git rebase --interactive 'bbc643cd^' #bbc643cd is the commit you want to modify
+    2. Change "pick" into "edit"
+    3. git commit --all --amend
+    4. git rebase --continue
+    5. git push --force
+    ```
