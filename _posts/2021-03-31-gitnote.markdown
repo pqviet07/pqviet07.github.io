@@ -1,0 +1,38 @@
+---
+layout: post
+title:  "Welcome to Jekyll!"
+date:   2021-03-31 13:08:02 +0700
+categories: jekyll update
+---
+---
+- Pull tất cả branch ở remote về local:
+
+    ```bash
+    git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done
+    git fetch --all
+    git pull --all
+    ```
+
+- Pull 1 branch cụ thể ở remote về local
+
+    ```bash
+    git switch <branch_name>
+    ```
+
+- Nếu git bắt buộc retype password mỗi lần pull thì có 2 cách giải quyết:
+    1. Sử dụng SSH
+    2. Dùng lệnh:
+
+    ```bash
+    git config --global credential.helper 'cache --timeout 86400000'
+    ```
+
+- Xử lí khi muốn thay đổi code đã commit:
+
+    ```bash
+    1. git rebase --interactive 'bbc643cd^' #bbc643cd is the commit you want to modify
+    2. Change "pick" into "edit"
+    3. git commit --all --amend
+    4. git rebase --continue
+    5. git push --force
+    ```
