@@ -26,9 +26,10 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  vietalgo
 facebook_username: pqvietu
-highlighter: rouge
+markdown: kramdown
 kramdown:
-  html_to_native: true
+  input: GFM
+  syntax_highlighter: rouge
 # Build settings
 theme: minima
 plugins:
